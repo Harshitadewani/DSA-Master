@@ -78,34 +78,38 @@ async function handleExecution(req, res, mode) {
   let updatedUser = null;
 
   if (result.status === "Accepted" && mode.toUpperCase() === "SUBMIT") {
+    const user = await User.findById(req.user._id);
+    updateStreak(user);
+
     if (progress.status !== "Solved") {
       progress.status = "Solved";
       progress.solvedAt = new Date();
-
-      const user = await User.findById(req.user._id);
       user.problemsSolved += 1;
-      updateStreak(user);
+    }
 
-      if (user.currentStreak >= 20) {
-        const badgeCode = "CONSISTENCY_20";
-        const hasBadge = user.badges.some((badge) => badge.code === badgeCode);
-        if (!hasBadge) {
-          user.badges.push({ code: badgeCode });
-        }
+    if (user.currentStreak >= 20) {
+      const badgeCode = "CONSISTENCY_20";
+      const hasBadge = user.badges.some((badge) => badge.code === badgeCode);
+      if (!hasBadge) {
+        user.badges.push({ code: badgeCode });
+      }
 
-        if (!user.badgeMailsSent.includes(badgeCode)) {
+      if (!user.badgeMailsSent.includes(badgeCode)) {
+        try {
           await sendBadgeEmail({
             toEmail: user.email,
             name: user.name,
             badgeLabel: "20-Day Consistency Badge",
           });
           user.badgeMailsSent.push(badgeCode);
+        } catch (mailError) {
+          console.error("Mail Error:", mailError);
         }
       }
-
-      await user.save();
-      updatedUser = user;
     }
+
+    await user.save();
+    updatedUser = user;
   } else if (progress.status === "Unsolved") {
     progress.status = "Attempted";
   }
@@ -125,6 +129,7 @@ async function handleExecution(req, res, mode) {
         problemsSolved: updatedUser.problemsSolved,
         currentStreak: updatedUser.currentStreak,
         longestStreak: updatedUser.longestStreak,
+        has20DayBadge: updatedUser.badges.some((badge) => badge.code === "CONSISTENCY_20"),
       } : null
     })
   );

@@ -27,6 +27,7 @@ function DashboardPage() {
           apiClient.get("/problems/library/all"),
         ]);
         setUser(profileResponse.data.data);
+        localStorage.setItem("dsa_user", JSON.stringify(profileResponse.data.data));
         setLibrary(libraryResponse.data.data);
       } catch (err) {
         console.error("Failed to load dashboard data");
