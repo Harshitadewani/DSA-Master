@@ -329,7 +329,7 @@ function ProblemPage() {
         </section>
 
         {/* PANEL 3: AI ASSISTANT CHATBOT */}
-        <section className="flex flex-col border-l border-slate-100 bg-white lg:col-span-3 overflow-hidden shadow-2xl">
+        <section className="flex flex-col border-l border-slate-100 bg-white lg:col-span-3 overflow-hidden shadow-2xl min-h-0">
            <div className="absolute inset-0 z-[-1] bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.05),transparent)] opacity-50" />
            <AIChatSidebar slug={slug} code={code} />
         </section>

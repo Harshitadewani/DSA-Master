@@ -61,7 +61,7 @@ function AIChatSidebar({ slug, code }) {
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4 scrollbar-hide">
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={`max-w-[100%] rounded-[1.5rem] p-5 text-[13px] leading-relaxed font-medium shadow-sm border ${
@@ -92,26 +92,26 @@ function AIChatSidebar({ slug, code }) {
         )}
       </div>
 
-      <div className="border-t border-slate-100 bg-slate-50/50 p-6">
-        <div className="relative flex flex-col gap-3">
+      <div className="border-t border-slate-100 bg-slate-50/50 p-4 shrink-0">
+        <div className="relative flex flex-col gap-2">
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), askAssistant())}
-            placeholder="Ask a question about complexity or logic..."
-            className="w-full resize-none rounded-2xl border border-slate-200 bg-white p-4 pr-12 text-[13px] font-medium leading-relaxed text-slate-700 outline-none transition-all placeholder:text-slate-400 focus:border-brand-500 focus:shadow-xl focus:shadow-brand-50/30"
-            rows={3}
+            placeholder="Ask a question..."
+            className="w-full resize-none rounded-2xl border border-slate-200 bg-white p-3 pr-12 text-[13px] font-medium leading-relaxed text-slate-700 outline-none transition-all placeholder:text-slate-400 focus:border-brand-500 focus:shadow-xl focus:shadow-brand-50/30"
+            rows={2}
           />
           <button
             onClick={askAssistant}
             disabled={loading}
-            className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-white shadow-xl shadow-slate-200 transition-all hover:bg-slate-800 active:scale-95 disabled:bg-slate-400"
+            className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white shadow-xl shadow-slate-200 transition-all hover:bg-slate-800 active:scale-95 disabled:bg-slate-400"
           >
-            <Send size={18} />
+            <Send size={16} />
           </button>
         </div>
-        <p className="mt-3 text-[10px] text-center font-bold text-slate-400 uppercase tracking-widest leading-none italic">
-           Powered by Gemini Pro Intelligence
+        <p className="mt-2 text-[9px] text-center font-bold text-slate-400 uppercase tracking-widest leading-none italic">
+           Powered by Gemini Intelligence
         </p>
       </div>
     </div>
