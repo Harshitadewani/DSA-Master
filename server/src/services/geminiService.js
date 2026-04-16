@@ -9,7 +9,7 @@ async function askGemini({ problemTitle, problemDescription, userCode, prompt })
 
   const genAI = new GoogleGenerativeAI(env.geminiApiKey);
   const model = genAI.getGenerativeModel({
-    model: env.geminiModel || "gemini-1.5-flash"
+    model: env.geminiModel || "gemini-2.5-flash"
   }); // Removed strict v1 to allow SDK default or beta support
 
   const fullPrompt = `
