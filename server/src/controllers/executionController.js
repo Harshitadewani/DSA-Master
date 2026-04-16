@@ -89,7 +89,7 @@ async function handleExecution(req, res, mode) {
 
     if (user.currentStreak >= 20) {
       const badgeCode = "CONSISTENCY_20";
-      const hasBadge = user.badges.some((badge) => badge.code === badgeCode);
+      const hasBadge = user.badges.some((badge) => badge.code === "CONSISTENCY_20");
       if (!hasBadge) {
         user.badges.push({ code: badgeCode });
       }
@@ -126,9 +126,8 @@ async function handleExecution(req, res, mode) {
       complexity,
       peopleBeatenPercent,
       user: updatedUser ? {
-        problemsSolved: updatedUser.problemsSolved,
-        currentStreak: updatedUser.currentStreak,
-        longestStreak: updatedUser.longestStreak,
+        ...updatedUser.toObject(),
+        password: undefined,
         has20DayBadge: updatedUser.badges.some((badge) => badge.code === "CONSISTENCY_20"),
       } : null
     })

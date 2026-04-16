@@ -9,24 +9,30 @@ export function AuthProvider({ children }) {
     return stored ? JSON.parse(stored) : null;
   });
 
+  const updateLocalUser = (userData) => {
+    if (userData) {
+      localStorage.setItem("dsa_user", JSON.stringify(userData));
+    } else {
+      localStorage.removeItem("dsa_user");
+    }
+    setUser(userData);
+  };
+
   const login = async (email, password) => {
     const { data } = await apiClient.post("/auth/login", { email, password });
     localStorage.setItem("dsa_token", data.data.token);
-    localStorage.setItem("dsa_user", JSON.stringify(data.data.user));
-    setUser(data.data.user);
+    updateLocalUser(data.data.user);
   };
 
   const register = async (name, email, password) => {
     const { data } = await apiClient.post("/auth/register", { name, email, password });
     localStorage.setItem("dsa_token", data.data.token);
-    localStorage.setItem("dsa_user", JSON.stringify(data.data.user));
-    setUser(data.data.user);
+    updateLocalUser(data.data.user);
   };
 
   const logout = () => {
     localStorage.removeItem("dsa_token");
-    localStorage.removeItem("dsa_user");
-    setUser(null);
+    updateLocalUser(null);
   };
 
   const value = useMemo(
@@ -36,7 +42,7 @@ export function AuthProvider({ children }) {
       login,
       register,
       logout,
-      setUser,
+      setUser: updateLocalUser,
     }),
     [user]
   );

@@ -69,9 +69,7 @@ function ProblemPage() {
       
       // Real-time Update for Auth Context
       if (payload.user) {
-        const updatedUser = { ...user, ...payload.user };
-        setUser(updatedUser);
-        localStorage.setItem("dsa_user", JSON.stringify(updatedUser));
+        setUser(payload.user);
       }
 
       if (payload.status === "Error") {

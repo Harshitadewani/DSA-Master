@@ -7,13 +7,13 @@ const getProfile = asyncHandler(async (req, res) => {
   
   // Real-time streak validation
   if (user.lastSolvedDate) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const lastSolved = new Date(user.lastSolvedDate);
-    lastSolved.setHours(0, 0, 0, 0);
+    const lastMidnight = new Date(lastSolved.getFullYear(), lastSolved.getMonth(), lastSolved.getDate());
     
-    const oneDayMs = 24 * 60 * 60 * 1000;
-    const diffDays = Math.round((today - lastSolved) / oneDayMs);
+    const diffMs = today.getTime() - lastMidnight.getTime();
+    const diffDays = Math.round(diffMs / (24 * 60 * 60 * 1000));
     
     // If more than 1 day has passed, the streak is broken
     if (diffDays > 1) {

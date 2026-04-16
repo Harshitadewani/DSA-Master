@@ -5,24 +5,34 @@ function startOfDay(date) {
 }
 
 function updateStreak(user) {
-  const today = startOfDay(new Date());
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   if (!user.lastSolvedDate) {
     user.currentStreak = 1;
-    user.longestStreak = Math.max(user.longestStreak, user.currentStreak);
+    user.longestStreak = Math.max(user.longestStreak || 0, 1);
     user.lastSolvedDate = today;
     return;
   }
 
-  const lastSolved = startOfDay(user.lastSolvedDate);
-  const oneDayMs = 24 * 60 * 60 * 1000;
-  const diffDays = Math.round((today - lastSolved) / oneDayMs);
+  const lastSolved = new Date(user.lastSolvedDate);
+  const lastMidnight = new Date(lastSolved.getFullYear(), lastSolved.getMonth(), lastSolved.getDate());
+  
+  const diffMs = today.getTime() - lastMidnight.getTime();
+  const diffDays = Math.round(diffMs / (24 * 60 * 60 * 1000));
 
-  if (diffDays === 0) return;
-  if (diffDays === 1) user.currentStreak += 1;
-  else user.currentStreak = 1;
+  if (diffDays <= 0) {
+    // Already solved today or time travel (shouldn't happen)
+    return;
+  }
 
-  user.longestStreak = Math.max(user.longestStreak, user.currentStreak);
+  if (diffDays === 1) {
+    user.currentStreak = (user.currentStreak || 0) + 1;
+  } else {
+    user.currentStreak = 1;
+  }
+
+  user.longestStreak = Math.max(user.longestStreak || 0, user.currentStreak);
   user.lastSolvedDate = today;
 }
 
