@@ -2,7 +2,7 @@
 
 **DSA Master Hub** is a premium, AI-powered Data Structures and Algorithms learning platform designed to help developers master coding interviews through interactive practice, real-time AI guidance, and comprehensive analytics.
 
-![Project Preview](https://via.placeholder.com/1200x600/4f46e5/ffffff?text=DSA+Master+Hub+Interface)
+![Project Preview](./screenshots/landing.png)
 
 ## ✨ Key Features
 
@@ -65,7 +65,7 @@
 
 | Dashboard | Coding Workspace | Analytics |
 | :---: | :---: | :---: |
-| ![Dashboard](https://via.placeholder.com/300x200) | ![Workspace](https://via.placeholder.com/300x200) | ![Analytics](https://via.placeholder.com/300x200) |
+| ![Dashboard](./screenshots/dashboard.png) | ![Workspace](./screenshots/workspace.png) | ![Analytics](./screenshots/analytics.png) |
 
 ## 🛡️ License
 
