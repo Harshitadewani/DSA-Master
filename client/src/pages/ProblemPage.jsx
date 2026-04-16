@@ -120,7 +120,7 @@ function ProblemPage() {
       
       <main className="flex-1 grid grid-cols-1 overflow-hidden lg:grid-cols-12">
         {/* PANEL 1: DESCRIPTION & LOGIC */}
-        <section className="relative flex flex-col border-r border-slate-100 bg-slate-50/30 lg:col-span-3">
+        <section className="relative flex flex-col border-r border-slate-100 bg-slate-50/30 lg:col-span-3 min-h-0">
           <div className="sticky top-0 z-10 border-b border-slate-100 bg-white/80 p-6 backdrop-blur-sm">
              <div className="flex items-center gap-2 mb-2">
                 <span className="rounded bg-brand-600 px-2 py-0.5 text-[10px] font-black uppercase text-white tracking-widest leading-none flex items-center h-4">
@@ -135,7 +135,7 @@ function ProblemPage() {
              </h1>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
+          <div className="flex-1 overflow-y-auto p-6">
              <div className="prose prose-slate max-w-none">
                 <h3 className="text-xs font-black uppercase tracking-widest text-brand-600 mb-2">Problem Statement</h3>
                 <p className="text-[13px] leading-6 font-medium text-slate-600 whitespace-pre-wrap">
@@ -177,7 +177,7 @@ function ProblemPage() {
         </section>
 
         {/* PANEL 2: CODE EDITOR & TERMINAL */}
-        <section className="relative flex flex-col lg:col-span-6 bg-white overflow-hidden">
+        <section className="relative flex flex-col lg:col-span-6 bg-white overflow-hidden min-h-0">
           {/* REWARD MODAL OVERLAY */}
           {stats.status === "Accepted" && (
             <div className="absolute inset-x-0 top-0 z-50 h-full flex items-center justify-center bg-white/90 backdrop-blur-xl animate-in zoom-in duration-500">
@@ -307,13 +307,13 @@ function ProblemPage() {
              </div>
              
              {terminalTab === "output" ? (
-               <pre className={`flex-1 overflow-auto p-8 text-[15px] font-mono leading-relaxed transition-colors tracking-tight scrollbar-hide ${
+               <pre className={`flex-1 overflow-auto p-8 text-[15px] font-mono leading-relaxed transition-colors tracking-tight ${
                   stats.status === "Error" ? "bg-rose-50 text-rose-600 font-bold" : "bg-slate-950 text-emerald-400 shadow-inner"
                }`}>
                   {terminal}
                </pre>
              ) : (
-               <div className="flex-1 overflow-auto p-6 bg-slate-50 flex flex-col">
+               <div className="flex-1 overflow-auto p-6 bg-slate-50 flex flex-col min-h-0">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-3 flex items-center gap-2">
                      Define input payload
                   </label>

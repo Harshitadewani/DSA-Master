@@ -61,7 +61,7 @@ function AIChatSidebar({ slug, code }) {
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4 scrollbar-hide">
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4">
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={`max-w-[100%] rounded-[1.5rem] p-5 text-[13px] leading-relaxed font-medium shadow-sm border ${
